@@ -11,14 +11,22 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-function addBookToLibrary() {
-
+function addBookToLibrary(book) {
+    myLibrary.push(book);
 }
 
 const innerGame = new Book('The Inner Game of Tennis', 'W. Timothey Gallwey', 192, 'Yes');
 
-let container = document.querySelector("#container");
-const dummy = document.createElement("div");
-dummy.textContent = "Hi";
-container.appendChild(dummy);
+addBookToLibrary(innerGame);
 
+console.log(myLibrary[0]);
+
+let tableSelection = document.querySelector("#table");
+const newRow = document.createElement("tr");
+
+var myLibraryLength = myLibrary.length;
+
+for (var i = 0; i < myLibraryLength; i++) {
+    newRow.innerText = JSON.stringify(myLibrary[i]);
+    tableSelection.appendChild(newRow);
+};
