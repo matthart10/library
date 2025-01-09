@@ -65,7 +65,8 @@
 
 #shelf {
   display: flex;
-  column-gap: 10px;
+  align-content: flex-start;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
