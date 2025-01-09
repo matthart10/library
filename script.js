@@ -4,7 +4,8 @@ const myLibrary = [];
 
 /* This is our object constructor, all book objects will have this as its prototype */
 
-function Book(title, author, pages, read) {
+function Book(image, title, author, pages, read) {
+    this.image = image;
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -15,7 +16,7 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-const innerGame = new Book('The Inner Game of Tennis', 'W. Timothey Gallwey', 192, 'Yes');
+const innerGame = new Book('./innerGame.jpg', 'The Inner Game of Tennis', 'W. Timothey Gallwey', 192, 'Yes');
 
 addBookToLibrary(innerGame);
 
@@ -26,6 +27,6 @@ const newCard = document.createElement("div");
 var myLibraryLength = myLibrary.length;
 
 for (var i = 0; i < myLibraryLength; i++) {
-    newCard.innerText = JSON.stringify(myLibrary[i]);
+    newCard.innerHTML = "<img src=" + (myLibrary[i].image) + " alt='book cover'>" + "<strong>" + "Name: " + "</strong>" + (myLibrary[i].title) + " by " + (myLibrary[i].author) + "<br />" + "<strong>" + " Pages: " + "</strong>" + (myLibrary[i].pages) + "<br />" + "<strong>" + " Read? " + "</strong>" + (myLibrary[i].read)
     shelfSelection.appendChild(newCard);
 };
