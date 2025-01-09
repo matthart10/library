@@ -19,14 +19,13 @@ const innerGame = new Book('The Inner Game of Tennis', 'W. Timothey Gallwey', 19
 
 addBookToLibrary(innerGame);
 
-console.log(myLibrary[0]);
 
-let tableSelection = document.querySelector("#table");
-const newRow = document.createElement("tr");
+let shelfSelection = document.querySelector("#shelf");
+const newCard = document.createElement("div");
 
 var myLibraryLength = myLibrary.length;
 
 for (var i = 0; i < myLibraryLength; i++) {
-    newRow.innerText = JSON.stringify(myLibrary[i]);
-    tableSelection.appendChild(newRow);
+    newCard.innerText = JSON.stringify(myLibrary[i]);
+    shelfSelection.appendChild(newCard);
 };
