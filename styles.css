@@ -103,4 +103,18 @@ img {
   border-width: 0;
 }
 
+.form {
+  position: absolute;
+  left: 25%;
+  top: 25%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
+}
+
+form {
+  width: 50%;
+}
 
