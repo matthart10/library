@@ -104,17 +104,40 @@ img {
 }
 
 .form {
-  position: absolute;
-  left: 25%;
-  top: 25%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   background-color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 40vh;
+  border-radius: 10px;
+  height: auto;
+  width: 40%;
+  display: none;
 }
 
-form {
-  width: 50%;
+label {
+  color: rgb(80, 79, 79);
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: .8em;
+}
+
+input {
+  border-color: #6f7074;
+  border-radius: 3px;
+  border-width: .5px;
+  border-style: solid;
+  margin-bottom: .9%;
+}
+
+select {
+  width: 15%;
+  margin-bottom: .9%;
+}
+
+#myForm {
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
 }
 

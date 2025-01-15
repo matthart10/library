@@ -41,10 +41,9 @@ addBookButton.innerHTML = "+";
 shelfSelection.appendChild(addBookButton);
 
 // Select form from html
-const theForm = document.querySelector("#myForm");
+const theForm = document.querySelector(".form");
 
-// Set the style to be hidden by default
-theForm.style.display = "none";
+
 
 // If the plus button is clicked, open up the form
 addBookButton.addEventListener("click", () => {
