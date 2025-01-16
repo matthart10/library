@@ -130,6 +130,10 @@ input {
   margin-bottom: .9%;
 }
 
+#imageFile {
+  border: none;
+}
+
 select {
   width: 15%;
   margin-bottom: .9%;
@@ -141,3 +145,11 @@ select {
   flex-direction: column;
 }
 
+#shelf > div:hover {
+  background-color: rgb(228, 222, 222);
+}
+
+#shelf > button:hover {
+  background-color: rgb(228, 222, 222);
+  cursor: pointer;
+}

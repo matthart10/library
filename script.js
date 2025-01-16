@@ -18,8 +18,14 @@ function addBookToLibrary(book) {
 // Creating Inner Game of Tennis object with Book object constructor
 const innerGame = new Book('./innerGame.jpg', 'The Inner Game of Tennis', 'W. Timothey Gallwey', 192, 'Yes');
 
+// Creating Cant Hurt Me object with Book object constructor
+const cantHurtMe = new Book('./cantHurtMe.jpg', "Can't Hurt Me", 'David Goggins', 364, 'Yes');
+
 // Add Inner Game of Tennis to library by calling this function
 addBookToLibrary(innerGame);
+
+// Add Cant Hurt Me to library by calling this function
+addBookToLibrary(cantHurtMe);
 
 // Select the div that contains all the cards
 let shelfSelection = document.querySelector("#shelf");
@@ -30,7 +36,7 @@ var myLibraryLength = myLibrary.length;
 // For loop that loops through array length and creates a div/card for each object
 for (var i = 0; i < myLibraryLength; i++) {
     const newCard = document.createElement("div");
-    newCard.innerHTML = "<img src=" + (myLibrary[i].image) + " alt='book cover'>" + "<strong>" + "Name: " + "</strong>" + (myLibrary[i].title) + " by " + (myLibrary[i].author) + "<br />" + "<strong>" + " Pages: " + "</strong>" + (myLibrary[i].pages) + "<br />" + "<strong>" + " Read? " + "</strong>" + (myLibrary[i].read)
+    newCard.innerHTML = "<img src=" + (myLibrary[i].image) + " alt='book cover'>" + "<strong>" + "Title: " + "</strong>" + (myLibrary[i].title) + "<br />" + "<strong>" + "Author:" + '</strong>' + (myLibrary[i].author) + "<br />" + "<strong>" + " Pages: " + "</strong>" + (myLibrary[i].pages) + "<br />" + "<strong>" + " Read? " + "</strong>" + (myLibrary[i].read)
     shelfSelection.appendChild(newCard);
 };
 
@@ -43,11 +49,13 @@ shelfSelection.appendChild(addBookButton);
 // Select form from html
 const theForm = document.querySelector(".form");
 
-
-
 // If the plus button is clicked, open up the form
 addBookButton.addEventListener("click", () => {
     theForm.style.display="block";
 });
 
-
+// If close button is clicked, hide the form
+const closeButton = document.querySelector(".close");
+closeButton.addEventListener("click", () => {
+    theForm.style.display="none";
+});
