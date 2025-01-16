@@ -52,10 +52,14 @@ const theForm = document.querySelector(".form");
 // If the plus button is clicked, open up the form
 addBookButton.addEventListener("click", () => {
     theForm.style.display="block";
+    addBookButton.classList.add("normalCursor");
 });
 
 // If close button is clicked, hide the form
 const closeButton = document.querySelector(".close");
 closeButton.addEventListener("click", () => {
     theForm.style.display="none";
+    addBookButton.classList.remove("normalCursor");
 });
+
+

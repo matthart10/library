@@ -149,7 +149,11 @@ select {
   background-color: rgb(228, 222, 222);
 }
 
-#shelf > button:hover {
+#shelf > button:focus, #shelf > button:hover {
   background-color: rgb(228, 222, 222);
   cursor: pointer;
+}
+
+#shelf > button.plus.normalCursor {
+  cursor: default;
 }
