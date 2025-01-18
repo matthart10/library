@@ -157,3 +157,7 @@ select {
 #shelf > button.plus.normalCursor {
   cursor: default;
 }
+
+form > button {
+  cursor: pointer;
+}

@@ -62,4 +62,25 @@ closeButton.addEventListener("click", () => {
     addBookButton.classList.remove("normalCursor");
 });
 
+// If the add button is clicked
+const addButton = document.querySelector(".add");
+addButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    theForm.style.display="none";
+    const form = document.querySelector("#myForm");
+    const submitter = document.querySelector("button[value=add");
+    const formData = new FormData(form, submitter);
+    const title = formData.get('title');
+    const author = formData.get('author');
+    const pages = formData.get('pages');
+    const read = formData.get('read');
+    const newBook = new Book('./innerGame.jpg', title, author, pages, read);
+    console.log(newBook);
+    addBookToLibrary(newBook);
+    console.log(myLibrary);
+    const newCard1 = document.createElement("div");
+    newCard1.innerHTML = "<img src=" + "./innerGame.jpg" + " alt='book cover'>" + "<strong>" + "Title: " + "</strong>" + title + "<br />" + "<strong>" + "Author:" + '</strong>' + author + "<br />" + "<strong>" + " Pages: " + "</strong>" + pages + "<br />" + "<strong>" + " Read? " + "</strong>" + read;
+    shelfSelection.appendChild(newCard1);
+})
+
 
