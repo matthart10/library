@@ -69,18 +69,27 @@ addButton.addEventListener("click", (event) => {
     theForm.style.display="none";
     const form = document.querySelector("#myForm");
     const submitter = document.querySelector("button[value=add");
-    const formData = new FormData(form, submitter);
-    const title = formData.get('title');
-    const author = formData.get('author');
-    const pages = formData.get('pages');
-    const read = formData.get('read');
-    const newBook = new Book('./innerGame.jpg', title, author, pages, read);
-    console.log(newBook);
+    var formData = new FormData(form, submitter);
+    var title = formData.get('title');
+    var author = formData.get('author');
+    var pages = formData.get('pages');
+    var read = formData.get('read');
+    var imageName = formData.get('imageFile');
+    form.reset();
+    var newBook = new Book(imageName, title, author, pages, read);
     addBookToLibrary(newBook);
     console.log(myLibrary);
     const newCard1 = document.createElement("div");
-    newCard1.innerHTML = "<img src=" + "./innerGame.jpg" + " alt='book cover'>" + "<strong>" + "Title: " + "</strong>" + title + "<br />" + "<strong>" + "Author:" + '</strong>' + author + "<br />" + "<strong>" + " Pages: " + "</strong>" + pages + "<br />" + "<strong>" + " Read? " + "</strong>" + read;
+    newCard1.innerHTML = "<strong>" + "Title: " + "</strong>" + title + "<br />" + "<strong>" + "Author:" + '</strong>' + author + "<br />" + "<strong>" + " Pages: " + "</strong>" + pages + "<br />" + "<strong>" + " Read? " + "</strong>" + read;
     shelfSelection.appendChild(newCard1);
-})
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var file = e.target.files[0];
+        reader.readAsDataURL(file);
+        var image = document.createElement("img");
+        image.src = e.target.result;
+        newCard1.appendChild(image);
+    };
+});
 
 
