@@ -75,21 +75,19 @@ addButton.addEventListener("click", (event) => {
     var pages = formData.get('pages');
     var read = formData.get('read');
     var imageName = formData.get('imageFile');
+    var reader  = new FileReader();
+    reader.readAsDataURL(imageName);
     form.reset();
     var newBook = new Book(imageName, title, author, pages, read);
     addBookToLibrary(newBook);
     console.log(myLibrary);
     const newCard1 = document.createElement("div");
-    newCard1.innerHTML = "<strong>" + "Title: " + "</strong>" + title + "<br />" + "<strong>" + "Author:" + '</strong>' + author + "<br />" + "<strong>" + " Pages: " + "</strong>" + pages + "<br />" + "<strong>" + " Read? " + "</strong>" + read;
-    shelfSelection.appendChild(newCard1);
-    var reader = new FileReader();
-    reader.onload = function(e) {
-        var file = e.target.files[0];
-        reader.readAsDataURL(file);
+    reader.onload = function(e)  {
         var image = document.createElement("img");
         image.src = e.target.result;
         newCard1.appendChild(image);
-    };
+    }
+    newCard1.innerHTML = "<strong>" + "Title: " + "</strong>" + title + "<br />" + "<strong>" + "Author:" + '</strong>' + author + "<br />" + "<strong>" + " Pages: " + "</strong>" + pages + "<br />" + "<strong>" + " Read? " + "</strong>" + read;
+    shelfSelection.appendChild(newCard1);
+    addImage();
 });
-
-
