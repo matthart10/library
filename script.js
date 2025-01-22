@@ -53,6 +53,7 @@ const theForm = document.querySelector(".form");
 addBookButton.addEventListener("click", () => {
     theForm.style.display="block";
     addBookButton.classList.add("normalCursor");
+    addBookButton.classList.add("greyBackground");
 });
 
 // If close button is clicked, hide the form
@@ -60,12 +61,18 @@ const closeButton = document.querySelector(".close");
 closeButton.addEventListener("click", () => {
     theForm.style.display="none";
     addBookButton.classList.remove("normalCursor");
+    addBookButton.classList.remove("greyBackground");
 });
+
+// Selecting the span at the beginning of the shelf div
+const firstPlaceholder = document.querySelector(".firstPlaceholder");
 
 // If the add button is clicked
 const addButton = document.querySelector(".add");
 addButton.addEventListener("click", (event) => {
     event.preventDefault();
+    addBookButton.classList.remove("normalCursor");
+    addBookButton.classList.remove("greyBackground");
     theForm.style.display="none";
     const form = document.querySelector("#myForm");
     const submitter = document.querySelector("button[value=add");
@@ -80,14 +87,9 @@ addButton.addEventListener("click", (event) => {
     form.reset();
     var newBook = new Book(imageName, title, author, pages, read);
     addBookToLibrary(newBook);
-    console.log(myLibrary);
     const newCard1 = document.createElement("div");
     reader.onload = function(e)  {
-        var image = document.createElement("img");
-        image.src = e.target.result;
-        newCard1.appendChild(image);
+        newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'>" + "<strong>" + "Title: " + "</strong>" + title + "<br />" + "<strong>" + "Author:" + '</strong>' + author + "<br />" + "<strong>" + " Pages: " + "</strong>" + pages + "<br />" + "<strong>" + " Read? " + "</strong>" + read;
     }
-    newCard1.innerHTML = "<strong>" + "Title: " + "</strong>" + title + "<br />" + "<strong>" + "Author:" + '</strong>' + author + "<br />" + "<strong>" + " Pages: " + "</strong>" + pages + "<br />" + "<strong>" + " Read? " + "</strong>" + read;
-    shelfSelection.appendChild(newCard1);
-    addImage();
+    shelfSelection.insertBefore(newCard1, firstPlaceholder);
 });
