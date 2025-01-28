@@ -33,12 +33,23 @@ let shelfSelection = document.querySelector("#shelf");
 // Get array length
 var myLibraryLength = myLibrary.length;
 
-// For loop that loops through array length and creates a div/card for each object
-for (var i = 0; i < myLibraryLength; i++) {
+// Function that loops through array, element is the element currently being looped through, run the displayBook function with element as the parameter
+function updateShelf() {
+    myLibrary.forEach((element) => displayBook(element));
+};
+
+// The display book function, takes in an element and then uses it and calls properties of this element such as .image and .author
+function displayBook(element) {
     const newCard = document.createElement("div");
-    newCard.innerHTML = "<img src=" + (myLibrary[i].image) + " alt='book cover'>" + "<strong>" + "Title: " + "</strong>" + (myLibrary[i].title) + "<br />" + "<strong>" + "Author:" + '</strong>' + (myLibrary[i].author) + "<br />" + "<strong>" + " Pages: " + "</strong>" + (myLibrary[i].pages) + "<br />" + "<strong>" + " Read? " + "</strong>" + (myLibrary[i].read)
+    if (element.read === "Yes") {
+        newCard.classList.add("readBackground");
+    };
+    newCard.innerHTML = "<img src=" + (element.image) + " alt='book cover'><strong>Title: </strong>" + (element.title) + "<br /><strong>Author: </strong>" + (element.author) + "<br /><strong>Pages: </strong>" + (element.pages) + "<br /><strong>Finished reading? </strong><span>" + (element.read) + "<input type='checkbox' id='readHTML' name='readHTML'></span>";
     shelfSelection.appendChild(newCard);
 };
+
+// Call the updateShelf() function for books already in the array
+updateShelf();
 
 // Add a separate card that is a button so you can click it to add a book
 const addBookButton = document.createElement("button");
@@ -88,8 +99,14 @@ addButton.addEventListener("click", (event) => {
     var newBook = new Book(imageName, title, author, pages, read);
     addBookToLibrary(newBook);
     const newCard1 = document.createElement("div");
+    if (read) {
+        read = "Yes";
+        newCard1.classList.add("readBackground");
+    } else {
+        read = "No";
+        }
     reader.onload = function(e)  {
-        newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'>" + "<strong>" + "Title: " + "</strong>" + title + "<br />" + "<strong>" + "Author:" + '</strong>' + author + "<br />" + "<strong>" + " Pages: " + "</strong>" + pages + "<br />" + "<strong>" + " Read? " + "</strong>" + read;
+        newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read + "<input type='checkbox' id='readHTML' name='readHTML'></span>";
     }
     shelfSelection.insertBefore(newCard1, firstPlaceholder);
 });

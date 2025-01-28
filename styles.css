@@ -163,6 +163,10 @@ select {
   cursor: default;
 }
 
+#shelf .readBackground{
+  background-color: rgb(169, 229, 145);
+}
+
 form > button {
   cursor: pointer;
 }
