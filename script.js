@@ -38,13 +38,17 @@ function updateShelf() {
     myLibrary.forEach((element) => displayBook(element));
 };
 
+// Counter so we have a unique id for every new checkbox that has been created
+let i = 0;
+
 // The display book function, takes in an element and then uses it and calls properties of this element such as .image and .author
 function displayBook(element) {
     const newCard = document.createElement("div");
     if (element.read === "Yes") {
         newCard.classList.add("readBackground");
     };
-    newCard.innerHTML = "<img src=" + (element.image) + " alt='book cover'><strong>Title: </strong>" + (element.title) + "<br /><strong>Author: </strong>" + (element.author) + "<br /><strong>Pages: </strong>" + (element.pages) + "<br /><strong>Finished reading? </strong><span>" + (element.read) + "<input type='checkbox' id='readHTML' name='readHTML'></span>";
+    i = i + 1;
+    newCard.innerHTML = "<img src=" + (element.image) + " alt='book cover'><strong>Title: </strong>" + (element.title) + "<br /><strong>Author: </strong>" + (element.author) + "<br /><strong>Pages: </strong>" + (element.pages) + "<br /><strong>Finished reading? </strong><span>" + (element.read) + "<input type='checkbox' id='read" + i + "' name='read" + i + "'></span>";
     shelfSelection.appendChild(newCard);
 };
 
@@ -104,9 +108,10 @@ addButton.addEventListener("click", (event) => {
         newCard1.classList.add("readBackground");
     } else {
         read = "No";
-        }
+        };
+    i = i + 1;
     reader.onload = function(e)  {
-        newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read + "<input type='checkbox' id='readHTML' name='readHTML'></span>";
+        newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read + "<input type='checkbox' id='read" + i + "' name='read" + i + "'></span>";
     }
     shelfSelection.insertBefore(newCard1, firstPlaceholder);
 });
