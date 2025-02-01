@@ -48,8 +48,21 @@ function displayBook(element) {
         newCard.classList.add("readBackground");
     };
     i = i + 1;
-    newCard.innerHTML = "<img src=" + (element.image) + " alt='book cover'><strong>Title: </strong>" + (element.title) + "<br /><strong>Author: </strong>" + (element.author) + "<br /><strong>Pages: </strong>" + (element.pages) + "<br /><strong>Finished reading? </strong><span>" + (element.read) + "<input type='checkbox' id='read" + i + "' name='read" + i + "'></span>";
+    newCard.innerHTML = "<img src=" + (element.image) + " alt='book cover'><strong>Title: </strong>" + (element.title) + "<br /><strong>Author: </strong>" + (element.author) + "<br /><strong>Pages: </strong>" + (element.pages) + "<br /><strong>Finished reading? </strong><span>" + (element.read);
+    const checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    newCard.appendChild(checkbox);
     shelfSelection.appendChild(newCard);
+    if (newCard.classList.contains("readBackground")) {
+        checkbox.setAttribute("checked", "true");
+    }
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            newCard.classList.add("readBackground");
+        } else {
+            newCard.classList.remove("readBackground");
+        }
+    });
 };
 
 // Call the updateShelf() function for books already in the array
@@ -111,7 +124,19 @@ addButton.addEventListener("click", (event) => {
         };
     i = i + 1;
     reader.onload = function(e)  {
-        newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read + "<input type='checkbox' id='read" + i + "' name='read" + i + "'></span>";
+        newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
     }
+    const checkbox1 = document.createElement("input");
+    checkbox1.setAttribute("type", "checkbox");
+    newCard1.appendChild(checkbox1);
     shelfSelection.insertBefore(newCard1, firstPlaceholder);
+    checkbox1.addEventListener('change', function() {
+        if (this.checked) {
+            // newCard.classList.add("readBackground");
+            console.log("Hi");
+        } else {
+            // newCard.classList.remove("readBackground")
+            console.log("Hello");
+        }
+    });
 });
