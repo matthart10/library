@@ -59,8 +59,14 @@ function displayBook(element) {
     checkbox.addEventListener('change', function() {
         if (this.checked) {
             newCard.classList.add("readBackground");
+            element.read = "Yes";
+            newCard.innerHTML = "<img src=" + (element.image) + " alt='book cover'><strong>Title: </strong>" + (element.title) + "<br /><strong>Author: </strong>" + (element.author) + "<br /><strong>Pages: </strong>" + (element.pages) + "<br /><strong>Finished reading? </strong><span>" + (element.read);
+            newCard.appendChild(checkbox);
         } else {
             newCard.classList.remove("readBackground");
+            element.read = "No";
+            newCard.innerHTML = "<img src=" + (element.image) + " alt='book cover'><strong>Title: </strong>" + (element.title) + "<br /><strong>Author: </strong>" + (element.author) + "<br /><strong>Pages: </strong>" + (element.pages) + "<br /><strong>Finished reading? </strong><span>" + (element.read);
+            newCard.appendChild(checkbox);
         }
     });
 };
@@ -135,8 +141,14 @@ addButton.addEventListener("click", (event) => {
         checkbox1.addEventListener('change', function() {
             if (this.checked) {
                 newCard1.classList.add("readBackground");
+                read = "Yes";
+                newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
+                newCard1.appendChild(checkbox1);
             } else {
                 newCard1.classList.remove("readBackground");
+                read = "No";
+                newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
+                newCard1.appendChild(checkbox1);
             };
         });
     };
