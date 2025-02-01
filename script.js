@@ -125,18 +125,19 @@ addButton.addEventListener("click", (event) => {
     i = i + 1;
     reader.onload = function(e)  {
         newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
-    }
-    const checkbox1 = document.createElement("input");
-    checkbox1.setAttribute("type", "checkbox");
-    newCard1.appendChild(checkbox1);
-    shelfSelection.insertBefore(newCard1, firstPlaceholder);
-    checkbox1.addEventListener('change', function() {
-        if (this.checked) {
-            // newCard.classList.add("readBackground");
-            console.log("Hi");
-        } else {
-            // newCard.classList.remove("readBackground")
-            console.log("Hello");
+        const checkbox1 = document.createElement("input");
+        checkbox1.setAttribute("type", "checkbox");
+        newCard1.appendChild(checkbox1);
+        shelfSelection.insertBefore(newCard1, firstPlaceholder);
+        if (newCard1.classList.contains("readBackground")) {
+            checkbox1.setAttribute("checked", "true");
         }
-    });
+        checkbox1.addEventListener('change', function() {
+            if (this.checked) {
+                newCard1.classList.add("readBackground");
+            } else {
+                newCard1.classList.remove("readBackground");
+            };
+        });
+    };
 });
