@@ -51,6 +51,7 @@ function displayBook(element) {
     newCard.innerHTML = "<img src=" + (element.image) + " alt='book cover'><strong>Title: </strong>" + (element.title) + "<br /><strong>Author: </strong>" + (element.author) + "<br /><strong>Pages: </strong>" + (element.pages) + "<br /><strong>Finished reading? </strong><span>" + (element.read);
     const checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("id",`checkbox${i}`);
     newCard.appendChild(checkbox);
     shelfSelection.appendChild(newCard);
     const removeBox = document.createElement("button");
@@ -142,6 +143,8 @@ addButton.addEventListener("click", (event) => {
         newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
         const checkbox1 = document.createElement("input");
         checkbox1.setAttribute("type", "checkbox");
+        checkbox1.setAttribute("type", "checkbox");
+        checkbox1.setAttribute("id",`checkbox${i}`);
         newCard1.appendChild(checkbox1);
         const removeBox1 = document.createElement("button");
         removeBox1.textContent = "Delete";

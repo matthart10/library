@@ -175,7 +175,7 @@ form > button {
   font-size: .8em;
   margin: 0;
   border-radius: 0;
-  border-color: black;
+  border: .5px solid black;
   color: black;
   width: auto;
   height: auto;
