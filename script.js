@@ -53,6 +53,13 @@ function displayBook(element) {
     checkbox.setAttribute("type", "checkbox");
     newCard.appendChild(checkbox);
     shelfSelection.appendChild(newCard);
+    const removeBox = document.createElement("button");
+    removeBox.classList.add("deleteButton");
+    removeBox.textContent = "Delete";
+    newCard.appendChild(removeBox);
+    removeBox.addEventListener('click', function() {
+        newCard.remove();
+    });
     if (newCard.classList.contains("readBackground")) {
         checkbox.setAttribute("checked", "true");
     }
@@ -62,11 +69,13 @@ function displayBook(element) {
             element.read = "Yes";
             newCard.innerHTML = "<img src=" + (element.image) + " alt='book cover'><strong>Title: </strong>" + (element.title) + "<br /><strong>Author: </strong>" + (element.author) + "<br /><strong>Pages: </strong>" + (element.pages) + "<br /><strong>Finished reading? </strong><span>" + (element.read);
             newCard.appendChild(checkbox);
+            newCard.appendChild(removeBox);
         } else {
             newCard.classList.remove("readBackground");
             element.read = "No";
             newCard.innerHTML = "<img src=" + (element.image) + " alt='book cover'><strong>Title: </strong>" + (element.title) + "<br /><strong>Author: </strong>" + (element.author) + "<br /><strong>Pages: </strong>" + (element.pages) + "<br /><strong>Finished reading? </strong><span>" + (element.read);
             newCard.appendChild(checkbox);
+            newCard.appendChild(removeBox);
         }
     });
 };
@@ -134,6 +143,13 @@ addButton.addEventListener("click", (event) => {
         const checkbox1 = document.createElement("input");
         checkbox1.setAttribute("type", "checkbox");
         newCard1.appendChild(checkbox1);
+        const removeBox1 = document.createElement("button");
+        removeBox1.textContent = "Delete";
+        removeBox1.classList.add("deleteButton");
+        newCard1.appendChild(removeBox1);
+        removeBox1.addEventListener('click', function() {
+            newCard1.remove();
+        });
         shelfSelection.insertBefore(newCard1, firstPlaceholder);
         if (newCard1.classList.contains("readBackground")) {
             checkbox1.setAttribute("checked", "true");
@@ -144,11 +160,13 @@ addButton.addEventListener("click", (event) => {
                 read = "Yes";
                 newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
                 newCard1.appendChild(checkbox1);
+                newCard1.appendChild(removeBox1);
             } else {
                 newCard1.classList.remove("readBackground");
                 read = "No";
                 newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
                 newCard1.appendChild(checkbox1);
+                newCard1.appendChild(removeBox1);
             };
         });
     };

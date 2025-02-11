@@ -170,3 +170,18 @@ select {
 form > button {
   cursor: pointer;
 }
+
+#shelf .deleteButton {
+  font-size: .8em;
+  margin: 0;
+  border-radius: 0;
+  border-color: black;
+  color: black;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+#shelf .deleteButton:hover {
+  background-color: rgb(189, 184, 184);
+}
