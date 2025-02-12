@@ -44,6 +44,7 @@ let i = 0;
 // The display book function, takes in an element and then uses it and calls properties of this element such as .image and .author
 function displayBook(element) {
     const newCard = document.createElement("div");
+    // Adding green background based on read answer
     if (element.read === "Yes") {
         newCard.classList.add("readBackground");
     };
@@ -53,17 +54,20 @@ function displayBook(element) {
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("id",`checkbox${i}`);
     newCard.appendChild(checkbox);
-    shelfSelection.appendChild(newCard);
     const removeBox = document.createElement("button");
     removeBox.classList.add("deleteButton");
     removeBox.textContent = "Delete";
     newCard.appendChild(removeBox);
+    shelfSelection.appendChild(newCard);
+    // Remove div card if delete button is clicked
     removeBox.addEventListener('click', function() {
         newCard.remove();
     });
+    // On load, checkbox is checked
     if (newCard.classList.contains("readBackground")) {
         checkbox.setAttribute("checked", "true");
     }
+    // Change background and HTML to Yes/No depending on if checkbox is checked or not
     checkbox.addEventListener('change', function() {
         if (this.checked) {
             newCard.classList.add("readBackground");
@@ -96,11 +100,12 @@ const theForm = document.querySelector(".form");
 // If the plus button is clicked, open up the form
 addBookButton.addEventListener("click", () => {
     theForm.style.display="block";
+    // Grey out button so it is unclickable anymore
     addBookButton.classList.add("normalCursor");
     addBookButton.classList.add("greyBackground");
 });
 
-// If close button is clicked, hide the form
+// If close button in the form is clicked, hide the form
 const closeButton = document.querySelector(".close");
 closeButton.addEventListener("click", () => {
     theForm.style.display="none";
@@ -111,13 +116,10 @@ closeButton.addEventListener("click", () => {
 // Selecting the span at the beginning of the shelf div
 const firstPlaceholder = document.querySelector(".firstPlaceholder");
 
-// If the add button is clicked
+// If the add button in the form is clicked is clicked
 const addButton = document.querySelector(".add");
 addButton.addEventListener("click", (event) => {
     event.preventDefault();
-    addBookButton.classList.remove("normalCursor");
-    addBookButton.classList.remove("greyBackground");
-    theForm.style.display="none";
     const form = document.querySelector("#myForm");
     const submitter = document.querySelector("button[value=add");
     var formData = new FormData(form, submitter);
@@ -128,49 +130,67 @@ addButton.addEventListener("click", (event) => {
     var imageName = formData.get('imageFile');
     var reader  = new FileReader();
     reader.readAsDataURL(imageName);
-    form.reset();
-    var newBook = new Book(imageName, title, author, pages, read);
-    addBookToLibrary(newBook);
-    const newCard1 = document.createElement("div");
-    if (read) {
-        read = "Yes";
-        newCard1.classList.add("readBackground");
+    // Form validation
+    if (title === "") {
+        alert("Title is empty, please add the title of your book.");
+    } else if (author == "") {
+        alert("Author is empty, please add the author of your book.");
+    } else if (pages == "") {
+        alert("# of pages is empty, please add the number of pages of your book.");
     } else {
-        read = "No";
-        };
-    i = i + 1;
-    reader.onload = function(e)  {
-        newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
-        const checkbox1 = document.createElement("input");
-        checkbox1.setAttribute("type", "checkbox");
-        checkbox1.setAttribute("type", "checkbox");
-        checkbox1.setAttribute("id",`checkbox${i}`);
-        newCard1.appendChild(checkbox1);
-        const removeBox1 = document.createElement("button");
-        removeBox1.textContent = "Delete";
-        removeBox1.classList.add("deleteButton");
-        newCard1.appendChild(removeBox1);
-        removeBox1.addEventListener('click', function() {
-            newCard1.remove();
-        });
-        shelfSelection.insertBefore(newCard1, firstPlaceholder);
-        if (newCard1.classList.contains("readBackground")) {
-            checkbox1.setAttribute("checked", "true");
-        }
-        checkbox1.addEventListener('change', function() {
-            if (this.checked) {
-                newCard1.classList.add("readBackground");
-                read = "Yes";
-                newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
-                newCard1.appendChild(checkbox1);
-                newCard1.appendChild(removeBox1);
-            } else {
-                newCard1.classList.remove("readBackground");
-                read = "No";
-                newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
-                newCard1.appendChild(checkbox1);
-                newCard1.appendChild(removeBox1);
+        addBookButton.classList.remove("normalCursor");
+        addBookButton.classList.remove("greyBackground");
+        theForm.style.display="none";
+        form.reset();
+        // Create new book
+        var newBook = new Book(imageName, title, author, pages, read);
+        addBookToLibrary(newBook);
+        const newCard1 = document.createElement("div");
+        // Green background add if checkbox was checked
+        if (read) {
+            read = "Yes";
+            newCard1.classList.add("readBackground");
+        } else {
+            read = "No";
             };
-        });
+        // Iteration
+        i = i + 1;
+        // Load everything in
+        reader.onload = function(e)  {
+            newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
+            const checkbox1 = document.createElement("input");
+            checkbox1.setAttribute("type", "checkbox");
+            checkbox1.setAttribute("id",`checkbox${i}`);
+            newCard1.appendChild(checkbox1);
+            const removeBox1 = document.createElement("button");
+            removeBox1.textContent = "Delete";
+            removeBox1.classList.add("deleteButton");
+            newCard1.appendChild(removeBox1);
+            shelfSelection.insertBefore(newCard1, firstPlaceholder);
+            // If delete button is clicked, delete the div
+            removeBox1.addEventListener('click', function() {
+                newCard1.remove();
+            });
+            // On load, checkbox is checked
+            if (newCard1.classList.contains("readBackground")) {
+                checkbox1.setAttribute("checked", "true");
+            }
+            // Change background and HTML to Yes/No depending on if checkbox is checked or not
+            checkbox1.addEventListener('change', function() {
+                if (this.checked) {
+                    newCard1.classList.add("readBackground");
+                    read = "Yes";
+                    newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
+                    newCard1.appendChild(checkbox1);
+                    newCard1.appendChild(removeBox1);
+                } else {
+                    newCard1.classList.remove("readBackground");
+                    read = "No";
+                    newCard1.innerHTML = "<img src=" + e.target.result + " alt='book cover'> <strong>Title: </strong>" + title + "<br /><strong>Author: </strong>" + author + "<br /><strong>Pages: </strong>" + pages + "<br /><strong>Finished reading?</strong><span>" + read;
+                    newCard1.appendChild(checkbox1);
+                    newCard1.appendChild(removeBox1);
+                };
+            });
+        };
     };
 });
